@@ -1,0 +1,7 @@
+npm i
+npm i mongodb
+npm i mongoose
+npm install joi
+npm install joi-objectid
+npm install jsonwebtoken body-parser
+npm i bcrypt
