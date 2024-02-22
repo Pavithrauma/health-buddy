@@ -54,7 +54,14 @@ router.get("/:id", async (req, res) => {
 
 router.post("/create-rawFood", upload.single("image"),verifyToken, async (req, res) => {
   const type = req.user;
-  const rawFoodDetails = req.body
+  const imageFile = req.file;
+  const rawFoodsDetails = req.body;
+  rawFoodsDetails.image = imageFile.filename;
+  rawFoodsDetails.filename = imageFile.filename;
+  rawFoodsDetails.mimetype = imageFile.mimetype;
+  rawFoodsDetails.size = imageFile.size;
+   
+  console.log("rawFoodsDetails"+JSON.stringify(rawFoodsDetails));
   const query = { type: 1 };
   if(type === 1){
   if (req.body.type == 1) {
@@ -70,12 +77,16 @@ router.post("/create-rawFood", upload.single("image"),verifyToken, async (req, r
     })      
   } else {
     try {
-      const result = rawFoodSchema.validate(req.body);
+      const result = rawFoods.validate(req.body);
       if (result.error) {
         res.send(result.error);
         return;
       } else {
-        
+        rawFoods.create(rawFoodsDetails).then(data=>{
+          res.send(data);
+        }).catch(err  => {
+          res.status(500).send(err);
+        })
       }
       // res.json(a1);
     } catch (err) {

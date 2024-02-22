@@ -36,4 +36,4 @@ const rawFoodSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("rawFood", rawFoodSchema);
+module.exports = mongoose.model("rawFoods", rawFoodSchema);

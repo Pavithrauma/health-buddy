@@ -5,3 +5,4 @@ npm install joi
 npm install joi-objectid
 npm install jsonwebtoken body-parser
 npm i bcrypt
+npm i multer

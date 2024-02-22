@@ -10,10 +10,8 @@ var mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var categoryRouter = require('./routes/categories');
-
+var rawFoodRouter = require('./routes/rawFoods');
 var app = express();
-
-
 mongoose.connect('mongodb://127.0.0.1:27017/health-buddy')
   .then(() => console.log('Connected!')).catch(err => console.log(err));
 // view engine setup
@@ -29,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/category',categoryRouter);
+app.use('/rawFoods',rawFoodRouter);
+
 app.get("/login", (req, res) => {
   const user = {
     name: req.body.name,
