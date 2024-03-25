@@ -6,3 +6,4 @@ npm install joi-objectid
 npm install jsonwebtoken body-parser
 npm i bcrypt
 npm i multer
+npm i express-validator

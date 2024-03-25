@@ -6,11 +6,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const jwt = require("jsonwebtoken");
-var bodyParser = require("body-parser");
+
 var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./src/Routes/UsersRouter');
+var usersRouter = require('./routes/users');
 var categoryRouter = require('./routes/categories');
 var rawFoodRouter = require('./routes/rawFoods');
 var app = express();
@@ -22,24 +22,7 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// app.use(
-//   bodyParser.json({
-//     limit: "50mb",
-//   })
-// );
-
-// //require("./src/Database/Connection").createConnection();
-
-// app.use(
-//   express.urlencoded({
-//     limit: "50mb",
-//     extended: true,
-//     parameterLimit: 1000000,
-//   })
-// );
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -60,7 +43,6 @@ app.get("/login", (req, res) => {
   //res.json({ message: "This is a protected route.", token });
 });
 
-app.use(require("./src/Routes/MainRouter"));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
